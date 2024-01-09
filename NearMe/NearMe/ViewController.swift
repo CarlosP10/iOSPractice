@@ -10,9 +10,11 @@ import MapKit
 
 class ViewController: UIViewController {
     
+    var locationManager: CLLocationManager?
+    
     lazy var mapView: MKMapView = {
         let map = MKMapView()
-//        map.showsUserLocation = true
+        map.showsUserLocation = true
         map.translatesAutoresizingMaskIntoConstraints = false
         return map
     }()
@@ -31,6 +33,15 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //initializae location manager
+        locationManager = CLLocationManager()
+        locationManager?.delegate = self
+        
+        //Solicitar los permisos segun sea necesario
+        locationManager?.requestWhenInUseAuthorization()
+        locationManager?.requestLocation()
+        
         setupUI()
     }
     
@@ -57,7 +68,15 @@ class ViewController: UIViewController {
             mapView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
+}
 
-
+//MARK: - CLLocationManagerDelegate
+extension ViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
+    }
 }
 
