@@ -13,6 +13,7 @@
 		7A5CB1602B4F1C8A00121137 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A5CB15F2B4F1C8A00121137 /* Assets.xcassets */; };
 		7A5CB1632B4F1C8A00121137 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A5CB1612B4F1C8A00121137 /* LaunchScreen.storyboard */; };
 		7A5CB16C2B4F2AB200121137 /* BudgetModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7A5CB16A2B4F2AB200121137 /* BudgetModel.xcdatamodeld */; };
+		7A5CB16E2B4F5FBB00121137 /* AddBudgetCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5CB16D2B4F5FBB00121137 /* AddBudgetCategoryViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		7A5CB1622B4F1C8A00121137 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7A5CB1642B4F1C8A00121137 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7A5CB16B2B4F2AB200121137 /* BudgetModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BudgetModel.xcdatamodel; sourceTree = "<group>"; };
+		7A5CB16D2B4F5FBB00121137 /* AddBudgetCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBudgetCategoryViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				7A5CB1612B4F1C8A00121137 /* LaunchScreen.storyboard */,
 				7A5CB1642B4F1C8A00121137 /* Info.plist */,
 				7A5CB16A2B4F2AB200121137 /* BudgetModel.xcdatamodeld */,
+				7A5CB16D2B4F5FBB00121137 /* AddBudgetCategoryViewController.swift */,
 			);
 			path = BudgetApp;
 			sourceTree = "<group>";
@@ -140,6 +143,7 @@
 				7A5CB16C2B4F2AB200121137 /* BudgetModel.xcdatamodeld in Sources */,
 				7A5CB15B2B4F1C8600121137 /* BudgetCategoriesTableViewController.swift in Sources */,
 				7A5CB1572B4F1C8600121137 /* AppDelegate.swift in Sources */,
+				7A5CB16E2B4F5FBB00121137 /* AddBudgetCategoryViewController.swift in Sources */,
 				7A5CB1592B4F1C8600121137 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
