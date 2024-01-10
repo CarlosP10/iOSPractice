@@ -62,6 +62,25 @@ class PlaceDetailViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    @objc func directionsButtonTapped(_ sender: UIButton) {
+        let coordinate = place.location.coordinate
+        let urlStr = String(format: "waze://?ll=%f,%f&navigate=yes", coordinate.latitude, coordinate.longitude)
+
+        guard let url = URL(string: urlStr) else { return }
+        
+        UIApplication.shared.open(url) { didOpen in
+            if !didOpen {
+                UIApplication.shared.open(URL(string: "https://apps.apple.com/sv/app/waze-navigation-live-traffic/id323229106?l=en-GB")!)
+            }
+        }
+    }
+    
+    @objc func callButtonTapped(_ sender: UIButton) {
+        print(place.phone.formatPhoneForCall)
+        guard let url = URL(string: "tel://\(place.phone.formatPhoneForCall)") else { return }
+        UIApplication.shared.open(url)
+    }
+    
     private func setupUI() {
         
         let stackView = UIStackView()
@@ -84,6 +103,9 @@ class PlaceDetailViewController: UIViewController {
         contactStackView.translatesAutoresizingMaskIntoConstraints = false
         contactStackView.axis = .horizontal
         contactStackView.spacing = UIStackView.spacingUseSystem
+        
+        directionsButton.addTarget(self, action: #selector(directionsButtonTapped), for: .touchUpInside)
+        callButton.addTarget(self, action: #selector(callButtonTapped), for: .touchUpInside)
         
         contactStackView.addArrangedSubview(directionsButton)
         contactStackView.addArrangedSubview(callButton)
