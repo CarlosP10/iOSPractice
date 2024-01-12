@@ -76,4 +76,8 @@ class BudgetCategoriesTableViewController: UITableViewController {
 //MARK: - NSFetchedResultsControllerDelegate
 extension BudgetCategoriesTableViewController: NSFetchedResultsControllerDelegate {
      
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.reloadData()
+    }
+    
 }
