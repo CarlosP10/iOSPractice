@@ -11,10 +11,23 @@ import CoreData
 class BudgetCategoriesTableViewController: UITableViewController {
 
     private var persistentContainer: NSPersistentContainer
+    private var fetchedResultsController: NSFetchedResultsController<BudgetCategory>!
     
     init(persistentContainer: NSPersistentContainer) {
         self.persistentContainer = persistentContainer
         super.init(nibName: nil, bundle: nil)
+        
+        let request = BudgetCategory.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        fetchedResultsController.delegate = self
+        
+        do {
+            try fetchedResultsController.performFetch()
+        } catch {
+            print(error.localizedDescription)
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -24,6 +37,9 @@ class BudgetCategoriesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        
+        //registe cell
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "BudgetTableViewCell")
     }
     
     @objc func showAddBudgetCategory(_ sender: UIBarButtonItem) {
@@ -38,6 +54,26 @@ class BudgetCategoriesTableViewController: UITableViewController {
         title = "Budget"
     }
 
+    //UITableViewDataSource delegate functions
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return (fetchedResultsController.fetchedObjects ?? []).count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "BudgetTableViewCell", for: indexPath)
+        
+        let budgetCategory = fetchedResultsController.object(at: indexPath)
+        
+        var configuration = cell.defaultContentConfiguration()
+        configuration.text = budgetCategory.name
+        cell.contentConfiguration = configuration
+        
+        return cell
+    }
 
 }
 
+//MARK: - NSFetchedResultsControllerDelegate
+extension BudgetCategoriesTableViewController: NSFetchedResultsControllerDelegate {
+     
+}
