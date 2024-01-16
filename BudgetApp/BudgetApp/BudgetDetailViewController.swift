@@ -11,6 +11,7 @@ import CoreData
 class BudgetDetailViewController: UIViewController {
 
     private var persistentContainer: NSPersistentContainer
+    private var fetchedResultsController: NSFetchedResultsController<Transaction>!
     private var budgetCategory: BudgetCategory
     
     lazy var nameTextField: UITextField = {
@@ -20,6 +21,7 @@ class BudgetDetailViewController: UIViewController {
         textField.leftViewMode = .always
         textField.borderStyle = .roundedRect
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.setContentHuggingPriority(.required, for: .horizontal)
         return textField
     }()
     
@@ -30,6 +32,7 @@ class BudgetDetailViewController: UIViewController {
         textField.leftViewMode = .always
         textField.borderStyle = .roundedRect
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.setContentHuggingPriority(.required, for: .horizontal)
         return textField
     }()
     
@@ -47,6 +50,7 @@ class BudgetDetailViewController: UIViewController {
         let button = UIButton(configuration: config)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Save Transaction", for: .normal)
+        button.setContentHuggingPriority(.defaultLow, for: .horizontal)
         return button
     }()
     
@@ -68,6 +72,20 @@ class BudgetDetailViewController: UIViewController {
         self.persistentContainer = persistentContainer
         self.budgetCategory = budgetCategory
         super.init(nibName: nil, bundle: nil)
+        
+        // create request based on selected budget category
+        let request = Transaction.fetchRequest()
+        request.predicate = NSPredicate(format: "category = %@", budgetCategory)
+        request.sortDescriptors = [NSSortDescriptor(key: "dateCreated", ascending: false)]
+        
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        fetchedResultsController.delegate = self
+        
+        do {
+            try fetchedResultsController.performFetch()
+        } catch {
+            errorMessageLabel.text = "Unable to fetch transactions."
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -91,6 +109,7 @@ class BudgetDetailViewController: UIViewController {
         stackView.spacing = UIStackView.spacingUseSystem
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
+        stackView.distribution = .fill
         
         stackView.addArrangedSubviews(amountLabel,
                                       nameTextField,
@@ -102,6 +121,7 @@ class BudgetDetailViewController: UIViewController {
         stackView.setCustomSpacing(50, after: amountLabel)
         
         view.addSubview(stackView)
+        saveTransactionButton.addTarget(self, action: #selector(saveTransactionButtonPressed), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
             nameTextField.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 0.9),
@@ -117,6 +137,42 @@ class BudgetDetailViewController: UIViewController {
         ])
     }
     
+    private var isFormValid: Bool {
+        guard let name = nameTextField.text, let amount = amountTextField.text else { return false }
+        
+        return !name.isEmpty && !amount.isEmpty && amount.isNumeric && amount.isGreatorThan(0)
+    }
+    
+    private func saveTransaction() {
+        
+        guard let name = nameTextField.text, let amount = amountTextField.text else {
+            return
+        }
+        
+        let transaction = Transaction(context: persistentContainer.viewContext)
+        transaction.name = name
+        transaction.amount = Double(amount) ?? 0.0
+        transaction.category = budgetCategory
+        transaction.dateCreated = Date()
+        
+        do {
+            try persistentContainer.viewContext.save()
+            tableView.reloadData()
+            nameTextField.text = ""
+            amountTextField.text = ""
+        } catch {
+            errorMessageLabel.text = "Unable to save transaction."
+        }
+    }
+    
+    @objc func saveTransactionButtonPressed(_ sender: UIButton) {
+        if isFormValid {
+            saveTransaction()
+        } else {
+            errorMessageLabel.text = "Make sure name and amount is valid."
+        }
+    }
+    
 
 }
 
@@ -124,11 +180,20 @@ class BudgetDetailViewController: UIViewController {
 extension BudgetDetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        (fetchedResultsController.fetchedObjects ?? []).count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionTableViewCell", for: indexPath)
+        
+        let transaction = fetchedResultsController.object(at: indexPath)
+        
+        //cell configuration
+        var content = cell.defaultContentConfiguration()
+        content.text = transaction.name
+        content.secondaryText = transaction.amount.formatAsCurrency()
+        cell.contentConfiguration = content
+        
         return cell
     }
     
@@ -137,4 +202,11 @@ extension BudgetDetailViewController: UITableViewDataSource {
 //MARK: - UITableViewDelegate
 extension BudgetDetailViewController: UITableViewDelegate {
     
+}
+
+//MARK: - NSFetchedResultsControllerDelegate
+extension BudgetDetailViewController: NSFetchedResultsControllerDelegate {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.reloadData()
+    }
 }
