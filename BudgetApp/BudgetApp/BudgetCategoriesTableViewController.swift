@@ -39,7 +39,7 @@ class BudgetCategoriesTableViewController: UITableViewController {
         setupUI()
         
         //registe cell
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "BudgetTableViewCell")
+        tableView.register(BudgetCategoryTableViewCell.self, forCellReuseIdentifier: "BudgetTableViewCell")
     }
     
     @objc func showAddBudgetCategory(_ sender: UIBarButtonItem) {
@@ -60,14 +60,13 @@ class BudgetCategoriesTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "BudgetTableViewCell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "BudgetTableViewCell", for: indexPath) as? BudgetCategoryTableViewCell else {
+            return BudgetCategoryTableViewCell(style: .default, reuseIdentifier: "BudgetTableViewCell")
+        }
         cell.accessoryType = .disclosureIndicator
+        
         let budgetCategory = fetchedResultsController.object(at: indexPath)
-        
-        var configuration = cell.defaultContentConfiguration()
-        configuration.text = budgetCategory.name
-        cell.contentConfiguration = configuration
-        
+        cell.configure(budgetCategory)
         return cell
     }
     

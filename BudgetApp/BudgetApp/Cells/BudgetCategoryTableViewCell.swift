@@ -45,10 +45,7 @@ class BudgetCategoryTableViewCell: UITableViewCell {
         stackView.axis = .horizontal
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.isLayoutMarginsRelativeArrangement = true
-        
-        nameLabel.text = "food"
-        amountLabel.text = "$200"
-        remainingLabel.text = "Remaining: $50"
+
         stackView.addArrangedSubviews(nameLabel)
         
         let vStackView = UIStackView()
@@ -64,6 +61,12 @@ class BudgetCategoryTableViewCell: UITableViewCell {
         stackView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         stackView.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
         
+    }
+    
+    func configure(_ budgetCategory: BudgetCategory) {
+        nameLabel.text = budgetCategory.name
+        amountLabel.text = budgetCategory.amount.formatAsCurrency()
+        remainingLabel.text = "Remaining: $250"
     }
 }
 
