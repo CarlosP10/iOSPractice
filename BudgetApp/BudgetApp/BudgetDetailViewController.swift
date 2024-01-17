@@ -68,6 +68,29 @@ class BudgetDetailViewController: UIViewController {
         return label
     }()
     
+    lazy var transactionTotalLabel: UILabel = {
+       let label = UILabel()
+        label.textAlignment = .center
+        return label
+    }()
+    
+    var transactionTotal: Double {
+        let transactions = fetchedResultsController.fetchedObjects ?? []
+        return transactions.reduce(0) { next, transaction in
+            next + transaction.amount
+        }
+    }
+    
+    private func resetForm() {
+        nameTextField.text = ""
+        amountTextField.text = ""
+        errorMessageLabel.text = ""
+    }
+    
+    private func updateTransactionTotal() {
+        transactionTotalLabel.text = transactionTotal.formatAsCurrency()
+    }
+    
     init(persistentContainer: NSPersistentContainer, budgetCategory: BudgetCategory) {
         self.persistentContainer = persistentContainer
         self.budgetCategory = budgetCategory
@@ -95,6 +118,7 @@ class BudgetDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        updateTransactionTotal()
     }
     
     private func setupUI() {
@@ -116,6 +140,7 @@ class BudgetDetailViewController: UIViewController {
                                       amountTextField,
                                       saveTransactionButton,
                                       errorMessageLabel,
+                                      transactionTotalLabel,
                                       tableView)
         
         stackView.setCustomSpacing(50, after: amountLabel)
@@ -158,8 +183,7 @@ class BudgetDetailViewController: UIViewController {
         do {
             try persistentContainer.viewContext.save()
             tableView.reloadData()
-            nameTextField.text = ""
-            amountTextField.text = ""
+            resetForm()
         } catch {
             errorMessageLabel.text = "Unable to save transaction."
         }
@@ -170,6 +194,16 @@ class BudgetDetailViewController: UIViewController {
             saveTransaction()
         } else {
             errorMessageLabel.text = "Make sure name and amount is valid."
+        }
+    }
+    
+    private func deleteTransaction(_ transaction: Transaction) {
+        persistentContainer.viewContext.delete(transaction)
+        
+        do {
+            try persistentContainer.viewContext.save()
+        } catch {
+            errorMessageLabel.text = "Unable to delete transaction"
         }
     }
     
@@ -201,12 +235,19 @@ extension BudgetDetailViewController: UITableViewDataSource {
 
 //MARK: - UITableViewDelegate
 extension BudgetDetailViewController: UITableViewDelegate {
-    
+    //allow swipe cell
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let transaction = fetchedResultsController.object(at: indexPath)
+            deleteTransaction(transaction)
+        }
+    }
 }
 
 //MARK: - NSFetchedResultsControllerDelegate
 extension BudgetDetailViewController: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.reloadData()
+        updateTransactionTotal()
     }
 }
