@@ -53,6 +53,17 @@ class BudgetCategoriesTableViewController: UITableViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         title = "Budget"
     }
+    
+    private func deleteBudgetCategory(_ budgetCategory: BudgetCategory) {
+        
+        persistentContainer.viewContext.delete(budgetCategory)
+        do {
+            try persistentContainer.viewContext.save()
+        } catch {
+            //show an alert
+            showAlert(title: "Error", message: "Unable to delete budget categroy")
+        }
+    }
 
     //UITableViewDataSource delegate functions
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -68,6 +79,13 @@ class BudgetCategoriesTableViewController: UITableViewController {
         let budgetCategory = fetchedResultsController.object(at: indexPath)
         cell.configure(budgetCategory)
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let budgetCategory = fetchedResultsController.object(at: indexPath)
+            deleteBudgetCategory(budgetCategory)
+        }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -20,6 +20,7 @@
 		7AB214D92B559C3900266D9D /* BudgetDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB214D82B559C3900266D9D /* BudgetDetailViewController.swift */; };
 		7AB214DB2B55B79100266D9D /* UIVIew+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB214DA2B55B79100266D9D /* UIVIew+Extensions.swift */; };
 		7AB214DD2B55B7C000266D9D /* UIStackVIew+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB214DC2B55B7C000266D9D /* UIStackVIew+Extensions.swift */; };
+		7AB502C52B58ADB1003AD773 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB502C42B58ADB1003AD773 /* UIViewController+Extensions.swift */; };
 		7AB8CEFC2B55BCC400F36B7A /* Doublbe+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB8CEFB2B55BCC400F36B7A /* Doublbe+Extensions.swift */; };
 		7AFC28682B5850660098746C /* BudgetCategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFC28672B5850660098746C /* BudgetCategoryTableViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -40,6 +41,7 @@
 		7AB214D82B559C3900266D9D /* BudgetDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetDetailViewController.swift; sourceTree = "<group>"; };
 		7AB214DA2B55B79100266D9D /* UIVIew+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIVIew+Extensions.swift"; sourceTree = "<group>"; };
 		7AB214DC2B55B7C000266D9D /* UIStackVIew+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackVIew+Extensions.swift"; sourceTree = "<group>"; };
+		7AB502C42B58ADB1003AD773 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		7AB8CEFB2B55BCC400F36B7A /* Doublbe+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Doublbe+Extensions.swift"; sourceTree = "<group>"; };
 		7AFC28672B5850660098746C /* BudgetCategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetCategoryTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -106,6 +108,7 @@
 				7AB214DC2B55B7C000266D9D /* UIStackVIew+Extensions.swift */,
 				7AB8CEFB2B55BCC400F36B7A /* Doublbe+Extensions.swift */,
 				7A4A7F1B2B58A86A001701E6 /* NSSet+Extensions.swift */,
+				7AB502C42B58ADB1003AD773 /* UIViewController+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -198,6 +201,7 @@
 				7AB8CEFC2B55BCC400F36B7A /* Doublbe+Extensions.swift in Sources */,
 				7AFC28682B5850660098746C /* BudgetCategoryTableViewCell.swift in Sources */,
 				7A5CB1712B50C36400121137 /* String+Extensions.swift in Sources */,
+				7AB502C52B58ADB1003AD773 /* UIViewController+Extensions.swift in Sources */,
 				7A5CB1592B4F1C8600121137 /* SceneDelegate.swift in Sources */,
 				7AB214DB2B55B79100266D9D /* UIVIew+Extensions.swift in Sources */,
 				7AB214D92B559C3900266D9D /* BudgetDetailViewController.swift in Sources */,
