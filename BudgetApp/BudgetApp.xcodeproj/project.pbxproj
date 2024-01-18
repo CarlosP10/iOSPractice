@@ -84,18 +84,16 @@
 		7A5CB1552B4F1C8600121137 /* BudgetApp */ = {
 			isa = PBXGroup;
 			children = (
+				7A5CB15F2B4F1C8A00121137 /* Assets.xcassets */,
+				7AB502C62B58AEBE003AD773 /* ViewControllers */,
 				7A4A7F182B58A745001701E6 /* Models */,
 				7AFC28662B5850560098746C /* Cells */,
 				7A5CB16F2B50C35800121137 /* Extensions */,
 				7A5CB1562B4F1C8600121137 /* AppDelegate.swift */,
 				7A5CB1582B4F1C8600121137 /* SceneDelegate.swift */,
-				7A5CB15A2B4F1C8600121137 /* BudgetCategoriesTableViewController.swift */,
-				7A5CB15F2B4F1C8A00121137 /* Assets.xcassets */,
 				7A5CB1612B4F1C8A00121137 /* LaunchScreen.storyboard */,
 				7A5CB1642B4F1C8A00121137 /* Info.plist */,
 				7A5CB16A2B4F2AB200121137 /* BudgetModel.xcdatamodeld */,
-				7AB214D82B559C3900266D9D /* BudgetDetailViewController.swift */,
-				7A5CB16D2B4F5FBB00121137 /* AddBudgetCategoryViewController.swift */,
 			);
 			path = BudgetApp;
 			sourceTree = "<group>";
@@ -111,6 +109,16 @@
 				7AB502C42B58ADB1003AD773 /* UIViewController+Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		7AB502C62B58AEBE003AD773 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				7A5CB15A2B4F1C8600121137 /* BudgetCategoriesTableViewController.swift */,
+				7AB214D82B559C3900266D9D /* BudgetDetailViewController.swift */,
+				7A5CB16D2B4F5FBB00121137 /* AddBudgetCategoryViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		7AFC28662B5850560098746C /* Cells */ = {
