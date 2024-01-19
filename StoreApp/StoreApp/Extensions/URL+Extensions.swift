@@ -31,6 +31,6 @@ extension URL {
     
     static func productsByCategory(_ categoryId: Int) -> URL {
         //categories/1/products
-        return URL(string: "/api/v1/categories\(categoryId)/products", relativeTo: Self.default)!
+        return URL(string: "/api/v1/categories/\(categoryId)/products", relativeTo: Self.default)!
     }
 }

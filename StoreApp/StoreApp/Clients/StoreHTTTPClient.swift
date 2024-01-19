@@ -14,6 +14,7 @@ enum NetworkError: Error {
 class StoreHTTTPClient {
     
     func getProductsByCategory(categoryId: Int) async throws -> [Product] {
+       
         let (data, response) = try await URLSession.shared.data(from: URL.productsByCategory(categoryId))
         
         guard let httpResponse = response as? HTTPURLResponse,
