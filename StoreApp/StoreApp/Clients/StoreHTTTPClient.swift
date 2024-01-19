@@ -13,8 +13,22 @@ enum NetworkError: Error {
 
 class StoreHTTTPClient {
     
-    
-    
+    func getProductsByCategory(categoryId: Int) async throws -> [Product] {
+        let (data, response) = try await URLSession.shared.data(from: URL.productsByCategory(categoryId))
+        
+        guard let httpResponse = response as? HTTPURLResponse,
+              httpResponse.statusCode == 200
+        else {
+            throw NetworkError.invalidServerRepsonse
+        }
+        
+        guard let products = try? JSONDecoder().decode([Product].self, from: data) else {
+            throw NetworkError.decodingError
+        }
+        
+        return products
+    }
+        
     func getAllCategories() async throws -> [Category] {
         
         let (data, response) = try await URLSession.shared.data(from: URL.allCategories)
