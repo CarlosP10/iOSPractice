@@ -13,6 +13,8 @@ enum NetworkError: Error {
 
 class StoreHTTTPClient {
     
+    
+    
     func getAllCategories() async throws -> [Category] {
         
         let (data, response) = try await URLSession.shared.data(from: URL.allCategories)
