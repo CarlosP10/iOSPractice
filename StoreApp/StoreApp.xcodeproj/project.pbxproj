@@ -19,6 +19,8 @@
 		7AD9F4AA2B60308D0099710C /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD9F4A92B60308D0099710C /* String+Extensions.swift */; };
 		7AD9F4AC2B60323F0099710C /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD9F4AB2B60323F0099710C /* UIViewController+Extensions.swift */; };
 		7AD9F4AE2B603BA00099710C /* CreateProductRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD9F4AD2B603BA00099710C /* CreateProductRequest.swift */; };
+		7AD9F4B02B6052460099710C /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD9F4AF2B6052460099710C /* ProductDetailViewController.swift */; };
+		7AD9F4B22B6054900099710C /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD9F4B12B6054900099710C /* Double+Extensions.swift */; };
 		7AF648FE2B599F290000D2E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF648FD2B599F290000D2E2 /* AppDelegate.swift */; };
 		7AF649002B599F290000D2E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF648FF2B599F290000D2E2 /* SceneDelegate.swift */; };
 		7AF649022B599F290000D2E2 /* CategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF649012B599F290000D2E2 /* CategoriesTableViewController.swift */; };
@@ -39,6 +41,8 @@
 		7AD9F4A92B60308D0099710C /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		7AD9F4AB2B60323F0099710C /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		7AD9F4AD2B603BA00099710C /* CreateProductRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProductRequest.swift; sourceTree = "<group>"; };
+		7AD9F4AF2B6052460099710C /* ProductDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewController.swift; sourceTree = "<group>"; };
+		7AD9F4B12B6054900099710C /* Double+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extensions.swift"; sourceTree = "<group>"; };
 		7AF648FA2B599F290000D2E2 /* StoreApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StoreApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AF648FD2B599F290000D2E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7AF648FF2B599F290000D2E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -84,6 +88,7 @@
 				7AD1475F2B5B2E5600AD485E /* Locale+Extensions.swift */,
 				7AD9F4A92B60308D0099710C /* String+Extensions.swift */,
 				7AD9F4AB2B60323F0099710C /* UIViewController+Extensions.swift */,
+				7AD9F4B12B6054900099710C /* Double+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -136,6 +141,7 @@
 				7AF649012B599F290000D2E2 /* CategoriesTableViewController.swift */,
 				7AD1475A2B5AD7C900AD485E /* ProductsTableViewController.swift */,
 				7AD9F4A52B5F59B40099710C /* AddProductViewController.swift */,
+				7AD9F4AF2B6052460099710C /* ProductDetailViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -215,6 +221,7 @@
 				7AF649022B599F290000D2E2 /* CategoriesTableViewController.swift in Sources */,
 				7AD9F4AE2B603BA00099710C /* CreateProductRequest.swift in Sources */,
 				7AD1475E2B5ADC3600AD485E /* ProductCellView.swift in Sources */,
+				7AD9F4B22B6054900099710C /* Double+Extensions.swift in Sources */,
 				7AD147572B59A3D600AD485E /* URL+Extensions.swift in Sources */,
 				7AD147542B59A1AC00AD485E /* Category.swift in Sources */,
 				7AD147512B59A15100AD485E /* StoreHTTTPClient.swift in Sources */,
@@ -223,6 +230,7 @@
 				7AF649002B599F290000D2E2 /* SceneDelegate.swift in Sources */,
 				7AD9F4AC2B60323F0099710C /* UIViewController+Extensions.swift in Sources */,
 				7AD147592B5ACEEB00AD485E /* Product.swift in Sources */,
+				7AD9F4B02B6052460099710C /* ProductDetailViewController.swift in Sources */,
 				7AD9F4A82B5F5F790099710C /* CategoryPickerView.swift in Sources */,
 				7AD147602B5B2E5600AD485E /* Locale+Extensions.swift in Sources */,
 			);
