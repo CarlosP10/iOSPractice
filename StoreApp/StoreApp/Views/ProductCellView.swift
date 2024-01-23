@@ -27,5 +27,5 @@ struct ProductCellView: View {
 }
 
 #Preview {
-    ProductCellView(product: Product(title: "new", price: 2.3, description: "new description", image: [URL(string: "https://placeimg.com/640/480/any?r=0.9178516507833767")!], category: Category(id: 1, name: "new", image: "https://placeimg.com/640/480/any?r=0.9178516507833767")))
+    ProductCellView(product: Product(title: "new", price: 2.3, description: "new description", images: [ "https://placeimg.com/640/480/any?r=0.9178516507833767"], category: Category(id: 1, name: "new", image: "https://placeimg.com/640/480/any?r=0.9178516507833767")))
 }

@@ -24,8 +24,14 @@ struct AddProductFormState {
     }
 }
 
+protocol AddProductViewControllerDelegate {
+    func addProductViewControllerDidCancel(controller: AddProductViewController)
+    func addProductViewControllerDidSave(product: Product, controller: AddProductViewController)
+}
+
 class AddProductViewController: UIViewController {
     
+    var delegate: AddProductViewControllerDelegate?
     private var selectedCategory: Category?
     private var addProductFormState = AddProductFormState()
     
@@ -148,11 +154,23 @@ class AddProductViewController: UIViewController {
     }
     
     @objc func cancelButtonPressed(_ sender: UIBarButtonItem) {
-        
+        delegate?.addProductViewControllerDidCancel(controller: self)
     }
     
     @objc func saveButtonPressed(_ sender: UIBarButtonItem) {
         
+        guard let title = titleTextField.text,
+              let price = Double(priceTextField.text ?? "0.00"),
+              let description = descriptionTextView.text,
+              let imageUrl = imageTextField.text,
+              let category = selectedCategory
+        else {
+            return
+        }
+        
+        let product = Product(title: title, price: price, description: description, images: [imageUrl], category: category)
+        
+        delegate?.addProductViewControllerDidSave(product: product, controller: self)
     }
     
 }
