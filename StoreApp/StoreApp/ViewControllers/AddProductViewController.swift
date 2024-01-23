@@ -11,6 +11,8 @@ import SwiftUI
 
 class AddProductViewController: UIViewController {
     
+    private var selectedCategory: Category?
+    
     lazy var titleTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Enter title"
@@ -45,6 +47,14 @@ class AddProductViewController: UIViewController {
         textView.backgroundColor = .lightGray
         return textView
     }()
+    
+    lazy var categoryPickView: CategoryPickerView = {
+        let pickerView = CategoryPickerView { [weak self] category in
+            print(category)
+            self?.selectedCategory = category
+        }
+        return pickerView
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,6 +73,13 @@ class AddProductViewController: UIViewController {
         stackView.addArrangedSubview(titleTextField)
         stackView.addArrangedSubview(priceTextField)
         stackView.addArrangedSubview(descriptionTextView)
+        
+        //category picker view
+        let hostingController = UIHostingController(rootView: categoryPickView)
+        stackView.addArrangedSubview(hostingController.view)
+        addChild(hostingController)
+        hostingController.didMove(toParent: self)
+        
         stackView.addArrangedSubview(imageTextField)
         
         view.addSubview(stackView)
