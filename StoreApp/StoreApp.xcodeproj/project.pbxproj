@@ -14,6 +14,7 @@
 		7AD1475B2B5AD7C900AD485E /* ProductsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD1475A2B5AD7C900AD485E /* ProductsTableViewController.swift */; };
 		7AD1475E2B5ADC3600AD485E /* ProductCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD1475D2B5ADC3600AD485E /* ProductCellView.swift */; };
 		7AD147602B5B2E5600AD485E /* Locale+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD1475F2B5B2E5600AD485E /* Locale+Extensions.swift */; };
+		7AD9F4A62B5F59B40099710C /* AddProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD9F4A52B5F59B40099710C /* AddProductViewController.swift */; };
 		7AF648FE2B599F290000D2E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF648FD2B599F290000D2E2 /* AppDelegate.swift */; };
 		7AF649002B599F290000D2E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF648FF2B599F290000D2E2 /* SceneDelegate.swift */; };
 		7AF649022B599F290000D2E2 /* CategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF649012B599F290000D2E2 /* CategoriesTableViewController.swift */; };
@@ -29,6 +30,7 @@
 		7AD1475A2B5AD7C900AD485E /* ProductsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsTableViewController.swift; sourceTree = "<group>"; };
 		7AD1475D2B5ADC3600AD485E /* ProductCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCellView.swift; sourceTree = "<group>"; };
 		7AD1475F2B5B2E5600AD485E /* Locale+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Locale+Extensions.swift"; sourceTree = "<group>"; };
+		7AD9F4A52B5F59B40099710C /* AddProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductViewController.swift; sourceTree = "<group>"; };
 		7AF648FA2B599F290000D2E2 /* StoreApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StoreApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AF648FD2B599F290000D2E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7AF648FF2B599F290000D2E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 			children = (
 				7AF649012B599F290000D2E2 /* CategoriesTableViewController.swift */,
 				7AD1475A2B5AD7C900AD485E /* ProductsTableViewController.swift */,
+				7AD9F4A52B5F59B40099710C /* AddProductViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -195,6 +198,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7AD9F4A62B5F59B40099710C /* AddProductViewController.swift in Sources */,
 				7AF649022B599F290000D2E2 /* CategoriesTableViewController.swift in Sources */,
 				7AD1475E2B5ADC3600AD485E /* ProductCellView.swift in Sources */,
 				7AD147572B59A3D600AD485E /* URL+Extensions.swift in Sources */,

@@ -11,6 +11,11 @@ import SwiftUI
 
 class ProductsTableViewController: UITableViewController {
     
+    lazy var addProductBarItemButton: UIBarButtonItem = {
+        let barButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addProductButtonPressed))
+        return barButtonItem
+    }()
+    
     private var category: Category
     private var client = StoreHTTTPClient()
     private var products: [Product] = []
@@ -28,9 +33,18 @@ class ProductsTableViewController: UITableViewController {
         super.viewDidLoad()
         title = category.name
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "ProductTableViewCell")
+        navigationItem.rightBarButtonItem = addProductBarItemButton
+        
         Task {
             await populateProdcuts()
         }
+    }
+    
+    @objc
+    private func addProductButtonPressed(_ sender: UIBarButtonItem) {
+        let addProductVC = AddProductViewController()
+        let navigationController = UINavigationController(rootViewController: addProductVC)
+        present(navigationController, animated: true)
     }
     
     private func populateProdcuts() async {
