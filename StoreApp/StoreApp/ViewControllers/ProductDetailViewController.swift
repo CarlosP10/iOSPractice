@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 class ProductDetailViewController: UIViewController {
     
@@ -30,6 +31,12 @@ class ProductDetailViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Delete", for: .normal)
         return button
+    }()
+    
+    lazy var loadingIndicatorView: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.style = .large
+        return activityIndicator
     }()
     
     init(product: Product) {
@@ -63,6 +70,25 @@ class ProductDetailViewController: UIViewController {
         descriptionLabel.text = product.description
         priceLabel.text = product.price.formatAsCurrency()
         
+        //fetch the images
+        Task {
+            loadingIndicatorView.startAnimating()
+            var images: [UIImage] = []
+            for image in (product.images ?? []) {
+                guard let imageURL = URL(string: image),
+                      let downloadedImage = await ImageLoader.load(url: imageURL) else { return }
+                images.append(downloadedImage)
+            }
+            
+            let productImageListVC = UIHostingController(rootView: ProductImageViewList(images: images))
+            guard let productImageListView = productImageListVC.view else { return }
+            stackView.insertArrangedSubview(productImageListView, at: 0)
+            addChild(productImageListVC)
+            productImageListVC.didMove(toParent: self)
+            loadingIndicatorView.stopAnimating()
+        }
+        
+        stackView.addArrangedSubview(loadingIndicatorView)
         stackView.addArrangedSubview(descriptionLabel)
         stackView.addArrangedSubview(priceLabel)
         stackView.addArrangedSubview(deleteProductButton)
