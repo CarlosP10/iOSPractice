@@ -71,7 +71,8 @@ class ProductDetailViewController: UIViewController {
                 }
                 
             } catch {
-                showAlert(title: "Error", message: "Unable to delete the product.")
+                //showAlert(title: "Error", message: "Unable to delete the product.")
+                showMessage(title: "Error", message: "Unable to delete the product. Please check productId", messageType: .error)
             }
         }
         
