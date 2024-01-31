@@ -58,7 +58,7 @@ class ProductsTableViewController: UITableViewController {
     
     private func populateProdcuts() async {
         do {
-            products = try await client.getProductsByCategory(categoryId: category.id)
+            products = try await client.load(Resource(url: URL.productsByCategory(category.id)))
             tableView.reloadData()
         } catch {
             print(error)
@@ -105,7 +105,11 @@ extension ProductsTableViewController: AddProductViewControllerDelegate {
         
         Task {
             do {
-                let newProduct = try await client.createProduct(productRequest: createProductRequest)
+                //let newProduct = try await client.createProduct(productRequest: createProductRequest)
+                let data = try JSONEncoder().encode(createProductRequest)
+                //we need to provide the type
+                let newProduct: Product = try await client.load(Resource(url: URL.createProduct, method: .post(data)))
+                
                 products.insert(newProduct, at: 0)
                 tableView.reloadData()
                 controller.dismiss(animated: true)
