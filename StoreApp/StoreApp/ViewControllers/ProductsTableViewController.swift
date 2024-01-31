@@ -40,6 +40,14 @@ class ProductsTableViewController: UITableViewController {
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        Task {
+            await populateProdcuts()
+            tableView.reloadData()
+        }
+    }
+    
     @objc
     private func addProductButtonPressed(_ sender: UIBarButtonItem) {
         let addProductVC = AddProductViewController()

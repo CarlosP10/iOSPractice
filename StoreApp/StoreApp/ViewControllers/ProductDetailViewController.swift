@@ -12,6 +12,7 @@ import SwiftUI
 class ProductDetailViewController: UIViewController {
     
     let product: Product
+    let client = StoreHTTTPClient()
     
     lazy var descriptionLabel: UILabel = {
         let label = UILabel()
@@ -30,6 +31,7 @@ class ProductDetailViewController: UIViewController {
         let button = UIButton(type: .roundedRect)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Delete", for: .normal)
+        button.addTarget(self, action: #selector(deleteProductButtonPressed(_:)), for: .touchUpInside)
         return button
     }()
     
@@ -57,6 +59,24 @@ class ProductDetailViewController: UIViewController {
         setupUI()
     }
     
+    @objc func deleteProductButtonPressed(_ sender: UIButton) {
+        
+        Task {
+            do {
+                guard let productId = product.id else { return }
+                
+                let isDeleted = try await client.deleteProduct(productId: productId)
+                if isDeleted {
+                    let _ = navigationController?.popViewController(animated: true)
+                }
+                
+            } catch {
+                print("Show error")
+            }
+        }
+        
+    }
+    
     private func setupUI() {
         
         let stackView = UIStackView()
@@ -74,9 +94,20 @@ class ProductDetailViewController: UIViewController {
         Task {
             loadingIndicatorView.startAnimating()
             var images: [UIImage] = []
-            for image in (product.images ?? []) {
-                guard let imageURL = URL(string: image),
-                      let downloadedImage = await ImageLoader.load(url: imageURL) else { return }
+            
+            guard let imagesJsonString = product.images?.first,
+                  let data = imagesJsonString.data(using: .utf8),
+                  let imageURLs = try? JSONDecoder().decode([String].self, from: data) else {
+                // Handle the case where the images array or its JSON representation is invalid
+                return
+            }
+            
+            for imageURLString in imageURLs {
+                guard let imageURL = URL(string: imageURLString),
+                      let downloadedImage = await ImageLoader.load(url: imageURL) else {
+                    // Handle the case where an image couldn't be loaded
+                    continue
+                }
                 images.append(downloadedImage)
             }
             
