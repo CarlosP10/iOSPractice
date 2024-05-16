@@ -6,5 +6,6 @@
         <page name='OperatorMap'/>
         <page name='Operador TryMap'/>
         <page name='Operador Retry'/>
+        <page name='Operador Filter'/>
     </pages>
 </playground>
