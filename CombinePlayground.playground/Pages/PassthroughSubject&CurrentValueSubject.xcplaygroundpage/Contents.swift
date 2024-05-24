@@ -1,6 +1,7 @@
 //: [Previous](@previous)
     
 import Foundation
+import Combine
 
 //MARK: - PassthroughSubject
 struct Weather {
