@@ -13,7 +13,7 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-                Text("Contador \(counter)")
+            Text("Contador \(counter)")
                 .bold()
                 .font(.largeTitle)
                 .padding()
@@ -28,31 +28,35 @@ struct ContentView: View {
 
 
 struct ListVideos: View {
-    
-    @State private var videosModel: [String] = []
+    ///Debemos iniciar con @ObservedObject si queremos mostrar los cambios
+    ///@ObservedObject se vuelve a iniciar cada vez que la pantalla se redibuja
+    //@ObservedObject private var videoViewModel = VideoViewModel()
+    ///Con @StateObject el estado no se pierde
+    @StateObject private var videoViewModel = VideoViewModel()
     
     var body: some View {
         NavigationView {
-            List(videosModel, id: \.self) { video in
+            VStack {
+                ///El mejor uso con State y Observed es que si es la primera vez que se muestra es mejor solo llamar State y si se usa en otra vista solo Observed 
+                RemoveVideos(videoViewModel: videoViewModel)
+            }
+            List(videoViewModel.videosModel, id: \.self) { video in
                 Text(video)
             }
             .navigationTitle("Videos")
             .navigationBarItems(leading:
-                                    Button("Añadir", action: addMoreTopics)
+                                    Button("Añadir", action: videoViewModel.addMoreTopics)
             )
         }
-        .onAppear {
-            videosModel = [
-                "Aprender X",
-                "Aprender Y",
-                "Aprender Z"
-            ]
-        }
     }
+}
+
+struct RemoveVideos: View {
     
-    func addMoreTopics(){
-        videosModel.append("Aprende U")
-        videosModel.append("Aprende O")
+    @ObservedObject var videoViewModel: VideoViewModel
+    
+    var body: some View {
+        Text("SwiftBeta Remove Video")
     }
 }
 
@@ -60,8 +64,9 @@ struct ListVideos: View {
     ContentView()
 }
 
-final class VideoViewModel {
-    var videosModel: [String] = []
+final class VideoViewModel: ObservableObject {
+    ///@Published similar a @State en lugar de usarse en un abstract se usa en una clase
+    @Published var videosModel: [String] = []
     
     init(){
         videosModel = ["Aprende SwiftUI",
@@ -70,7 +75,7 @@ final class VideoViewModel {
     }
     
     func addMoreTopics() {
-        videosModel.append ( "Aprende CI/CD" )
-        videosModel.append("Aprende Git" )
+        videosModel.append("Aprende CI/CD")
+        videosModel.append("Aprende Git")
     }
 }
