@@ -9,7 +9,7 @@ import SwiftUI
 
 struct View3: View {
     
-    @ObservedObject var viewModel: ViewModel
+    @EnvironmentObject var viewModel: ViewModel
     
     var body: some View {
         VStack {
@@ -23,5 +23,5 @@ struct View3: View {
 }
 
 #Preview {
-    View3(viewModel: ViewModel())
+    View3()
 }

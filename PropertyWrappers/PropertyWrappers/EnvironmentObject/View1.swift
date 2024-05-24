@@ -22,8 +22,9 @@ struct View1: View {
                 .font(.largeTitle)
             Text("View 1")
                 .padding()
-            View2(viewModel: viewModel)
+            View2()
         }
+        .environmentObject(viewModel)
     }
 }
 
